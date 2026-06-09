@@ -52,16 +52,33 @@ export const SubmitButton = () => {
   };
 
   return (
-    <div
+    <button
+      onClick={handleSubmit}
       style={{
+        height: '48px',
+        padding: '0 24px',
+
+        borderRadius: '12px',
+
+        background: '#2563EB',
+        color: '#FFFFFF',
+
+        border: 'none',
+
+        fontSize: '15px',
+        fontWeight: 600,
+
+        cursor: 'pointer',
+
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '20px',
+
+        boxShadow:
+          '0 4px 12px rgba(37,99,235,0.25)',
       }}
     >
-      <button onClick={handleSubmit}>
-        Submit Pipeline
-      </button>
-    </div>
+      Submit Pipeline
+    </button>
   );
 };

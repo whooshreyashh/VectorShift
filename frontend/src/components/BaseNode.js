@@ -1,5 +1,17 @@
 import { Handle, Position } from 'reactflow';
 
+const nodeColors = {
+  Input: '#2563EB',
+  Output: '#10B981',
+  LLM: '#7C3AED',
+  Text: '#F59E0B',
+  Math: '#4F46E5',
+  Email: '#EC4899',
+  API: '#06B6D4',
+  Filter: '#F97316',
+  Delay: '#64748B',
+};
+
 export const BaseNode = ({
   id,
   title,
@@ -9,18 +21,28 @@ export const BaseNode = ({
   width = 260,
   minHeight = 120,
 }) => {
+  const accent = nodeColors[title] || '#2563EB';
+
   return (
     <div
       style={{
         width,
         minHeight,
         background: '#FFFFFF',
-        border: '1px solid #E2E8F0',
-        borderRadius: '16px',
-        padding: '14px',
-        boxShadow: '0 10px 30px rgba(15,23,42,0.08)',
+        borderRadius: '18px',
+        overflow: 'hidden',
+        border: `1px solid ${accent}20`,
+        boxShadow:
+          '0 10px 30px rgba(15,23,42,0.08)',
       }}
     >
+      <div
+        style={{
+          height: '6px',
+          background: accent,
+        }}
+      />
+
       {inputs.map((input, index) => (
         <Handle
           key={input.id}
@@ -31,8 +53,9 @@ export const BaseNode = ({
             top: `${((index + 1) * 100) / (inputs.length + 1)}%`,
             width: 12,
             height: 12,
-            background: '#3B82F6',
+            background: accent,
             border: '2px solid white',
+            boxShadow: `0 0 10px ${accent}`,
           }}
         />
       ))}
@@ -47,40 +70,60 @@ export const BaseNode = ({
             top: `${((index + 1) * 100) / (outputs.length + 1)}%`,
             width: 12,
             height: 12,
-            background: '#10B981',
+            background: accent,
             border: '2px solid white',
+            boxShadow: `0 0 10px ${accent}`,
           }}
         />
       ))}
 
       <div
         style={{
-          borderBottom: '1px solid #E2E8F0',
-          paddingBottom: '10px',
-          marginBottom: '12px',
+          padding: '14px',
         }}
       >
-        <span
+        <div
           style={{
-            fontSize: '16px',
-            fontWeight: '700',
-            color: '#0F172A',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '12px',
           }}
         >
-          {title}
-        </span>
-      </div>
+          <span
+            style={{
+              fontWeight: 700,
+              color: '#0F172A',
+            }}
+          >
+            {title}
+          </span>
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          fontSize: '14px',
-          color: '#334155',
-        }}
-      >
-        {children}
+          <span
+            style={{
+              fontSize: '11px',
+              fontWeight: 600,
+              padding: '4px 8px',
+              borderRadius: '999px',
+              background: `${accent}15`,
+              color: accent,
+            }}
+          >
+            NODE
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            fontSize: '14px',
+            color: '#334155',
+          }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
