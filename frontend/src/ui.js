@@ -1,7 +1,3 @@
-// ui.js
-// Displays the drag-and-drop UI
-// --------------------------------------------------
-
 import { useState, useRef, useCallback } from 'react';
 
 import ReactFlow, {
@@ -164,6 +160,9 @@ export const PipelineUI = () => {
           padding: 0.4,
           maxZoom: 0.85,
         }}
+        deleteKeyCode={['Delete', 'Backspace']}
+        nodesFocusable={true}
+        elementsSelectable={true}
         defaultEdgeOptions={{
           animated: true,
           style: {
@@ -182,7 +181,7 @@ export const PipelineUI = () => {
         nodeTypes={nodeTypes}
         proOptions={proOptions}
         snapGrid={[gridSize, gridSize]}
-        connectionLineType='smoothstep'
+        connectionLineType="smoothstep"
       >
         <Background
           variant={BackgroundVariant.Dots}
